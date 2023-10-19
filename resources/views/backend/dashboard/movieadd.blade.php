@@ -26,6 +26,7 @@
 
     <link href="custom/css/animate.css" rel="stylesheet">
     <link href="custom/css/style.css" rel="stylesheet">
+    <link href="custom/customize.css" rel="stylesheet">
 </head>
 
 <body>

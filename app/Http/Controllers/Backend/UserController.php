@@ -102,6 +102,15 @@ class UserController extends Controller
         $data = $users->update();
         //dd($data);
         
-        return redirect()->back()->with('success', 'Cập nhật thông tin tài khoản thành công');
+        return redirect()->route('movie.dashboard.user')->with('success', 'Cập nhật thông tin tài khoản thành công');
+    }
+
+    public function search(Request $request){
+        $search = User::whereName($request->input('searchname'))->get();
+        //dd($search);
+
+        return view('backend.dashboard.userindex', compact('search'));
+
     }
 }
+

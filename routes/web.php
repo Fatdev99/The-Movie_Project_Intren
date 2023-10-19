@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Backend\AuthController;
 use App\Http\Controllers\Backend\DashboardController;
+use App\Http\Controllers\Backend\ActorController;
 use App\Http\Controllers\Backend\UserController;
 use App\Http\Controllers\Backend\MovieController;
 use App\Http\Middleware\AuthMiddleware;
@@ -21,12 +22,6 @@ use App\Http\Middleware\LogoutMiddleware
 |
 */
 
-// ROUTE INDEX //
- Route::get(
-    'actor', function () {
-     return view('frontend.layout.actor');
- })->name('movie.actor');
-
 // ROUTE USER CONTROLLER //
 
 Route::controller(UserController::class)->group(function() {
@@ -34,8 +29,9 @@ Route::controller(UserController::class)->group(function() {
     Route::post('/store', 'store')->name('movie.user.store');
     Route::get('/dashboard/user', 'Index')->name('movie.dashboard.user')->middleware(AuthMiddleware::class);
     Route::get('/dashboard/user/delete/{id}', 'delete')->name('movie.user.delete');
-    Route::get('/dashboard/user/edit/{id}', 'edit')->name('movie.user.edit')->middleware(AuthMiddleware::class);
+    Route::get('/dashboard/user/edit/{id}', 'edit')->name('movie.user.edit');
     Route::post('/dashboard/user/update/{id}', 'update')->name('movie.user.update');
+    Route::get('/dashboard/user/search', 'search')->name('movie.user.search');
 });
 
  // ROUTE AUTHENTICATION CONTROLLER //
@@ -63,9 +59,20 @@ Route::controller(MovieController::class)->group(function() {
     Route::get('/movie/detail/{id}', 'detail')->name('movie.movie.detail');
     Route::get('/movie/play/{id}', 'play')->name('movie.movie.play');
     Route::get('/dashboard/movie', 'Index_admin')->name('movie.dashboard.movie')->middleware(AuthMiddleware::class);
-    Route::get('/dashboard/movie/delete/{id}', 'delete')->name('movie.movie.delete');
-    Route::get('/dashboard/movie/edit/{id}', 'edit')->name('movie.movie.edit')->middleware(AuthMiddleware::class);
-    Route::post('/dashboard/movie/update/{id}', 'update')->name('movie.movie.update');
     Route::get('/movie/add', 'add')->name('movie.movie.add');
     Route::post('/movie/store', 'store')->name('movie.movie.store');
+    Route::get('/dashboard/movie/delete/{id}', 'delete')->name('movie.movie.delete')->middleware(AuthMiddleware::class);;
+    Route::get('/dashboard/movie/edit/{id}', 'edit')->name('movie.movie.edit')->middleware(AuthMiddleware::class);
+    Route::post('/dashboard/movie/update/{id}', 'update')->name('movie.movie.update')->middleware(AuthMiddleware::class);;
+    Route::get('/dashboard/movie/search', 'admin_search')->name('movie.movie.ad-search');
+    Route::get('/movie/search', 'searchMovie')->name('movie.movie.mv-search');
+    Route::get('tvShow/search', 'searchTVshow')->name('movie.movie.tv-search');
+    Route::get('/search', 'searchIndex')->name('movie.movie.searchIndex');
+});
+
+ // ROUTE ACTOR CONTROLLER //
+
+ Route::controller(ActorController::class)->group(function() {
+    Route::get('/actor', 'Index')->name('movie.actor.index');
+    Route::get('/actor/detail/{id}', 'detail')->name('movie.actor.detail');
 });

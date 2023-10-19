@@ -17,37 +17,35 @@
      <!-- ==========START CONTENT ============ -->
 
      <div class="max-w-[1320px] mx-auto md:mt-[66px] mt-[61px]">
-       @isset ($mvlist)
+        @if(isset($mvlist) || isset($mvsearch))
           <h2 class="pt-7 pb-7 pl-5 pr-5 lg:pl-0 lg:pr-0  text-2xl font-semibold ">
             Popular Movies
           </h2>
-        @endisset
+        @endif
 
-        @isset ($tvlist)
+        @if(isset($tvlist) || isset($tvsearch))
         <h2 class="pt-7 pb-7 pl-5 pr-5 lg:pl-0 lg:pr-0  text-2xl font-semibold ">
-          Popular tvShow
+          Popular TV Shows
         </h2>
-        @endisset
+        @endif
       
         <div class="grid md:grid-cols-[260px,1fr] grid-cols-[1fr] gap-4 md:gap-8 pl-5 pr-5 lg:pl-0 lg:pr-0 ">
           @include('frontend.component.searchsidebar')
-      
+          
+          @if(isset($mvsearch) || isset($tvsearch))
+            @include('frontend.component.listsearch')
+          @else
           @include('frontend.component.listmain')
+          @endif
         </div>
       </div>
-      
-
 
      <!-- ==========END CONTENT ============ -->
       
-
-
       <!-- ==================================== START FOOTER  ========================= -->
       @include('frontend.component.footer')
       <!-- ==================================== END FOOTER  ========================= -->
-      
-    
-    
+
     </div>
   </body>
 </html>

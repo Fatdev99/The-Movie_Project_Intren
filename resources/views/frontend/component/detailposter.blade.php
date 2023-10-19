@@ -30,15 +30,15 @@
               >
                 PG - 13
               </span>
-              <span class="date">{{ $movies->release_date }} (US)</span>
+              <span class="date">{{ $movies->releaseyear }} (US)</span>
               <span class="category poster-facts--relative relative ml-[6px]"
                 >Phim Hành Động, Phim Bí Ẩn, Phim Gây Cấn, Phim Hình Sự</span
               >
               <span class="runtime poster-facts--relative relative ml-[6px]"
-                >{{ $movies->convertMinutesToHours($movies->runtime) }}</span
+                >{{ $movies->convertMinutesToHours($movies->duration) }}</span
               >
             </div>
-            <div class="my-3">
+            <div class="my-3 mb-[30px]">
               <ul class="poster-actions flex items-center gap-4 text-white">
                 <li class="chart flex items-center">
                   <div
@@ -119,7 +119,7 @@
             </div>
             <div class="header-info text-white">
 
-              <div class="overview">
+              <div class="overview mb-[50px]">
                 <p class="overview-lable text-2xl font-semibold mb-2">
                   Overview
                 </p>
@@ -129,32 +129,27 @@
         
                 </span>
               </div>
-              <div class="people-poster mt-3 text-gray-200 grid grid-cols-3 gap-5">
-                <div class="people-poster--profile">
-                  <a
-                    href="/person/41671-nimrod-antal"
-                    class="text-base font-medium"
-                    >Nimród Antal</a
-                  >
-                  <p class="character text-sm mt-0">Director</p>
-                </div>
-                <div class="people-poster--profile">
-                  <a
-                    href="/person/41671-nimrod-antal"
-                    class="text-base font-medium"
-                    >Nimród Antal</a
-                  >
-                  <p class="character text-sm mt-0">Director</p>
-                </div>
-                <div class="people-poster--profile">
-                  <a
-                    href="/person/41671-nimrod-antal"
-                    class="text-base font-medium"
-                    >Nimród Antal</a
-                  >
-                  <p class="character text-sm mt-0">Director</p>
-                </div>
 
+              <div class="overview">
+                  <p class="overview-lable text-2xl font-semibold mb-2">
+                    Actor
+                  </p>
+                  
+                  <div class="people-poster mt-3 text-gray-200 grid grid-cols-4 gap-5">
+                    
+                    @isset($m_actors)
+                      @foreach($m_actors as $m_ac)
+                        <div class="people-poster--profile">
+                          <a
+                          href="/person/41671-nimrod-antal"
+                          class="text-base font-medium"
+                          >{{ $m_ac->actor_name }}</a
+                          >
+                        </div>
+                      @endforeach
+                    @endisset
+                    
+                  </div>
               </div>
 
               <div class="mt-10 grid grid-rows-2">

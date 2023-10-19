@@ -24,9 +24,9 @@ class UpdateUserRequest extends FormRequest
         //dd($this->route('id'));
         return [
             'name' => 'required|min:8',
-            'phone' => 'required|numeric',
+            'phone' => 'required|min:8',
             'address' => 'required',
-            'email' => 'required|email|unique:users,email,'. $this->route('id')    
+            'email' => 'required|email' 
         ];
 
     }
@@ -37,10 +37,10 @@ class UpdateUserRequest extends FormRequest
             'name.required' => 'Bạn chưa nhập vào tên!',
             'name.min' => 'Tên phải có tối thiểu 8 kí tự!',
             'phone.required' => 'Bạn chưa nhập vào số điện thoại!',
+            'phone.min' => 'Số điện thoại phải có ít nhất 8 số!',
             'address.required' => 'Bạn chưa nhập vào địa chỉ!',
             'email.required' => 'Bạn chưa nhập vào email!',
             'email.email' => 'Email chưa đúng định dạng. Ví dụ abc@gmail.com',
-            'email.unique' => 'Email đã tồn tại. Vui lòng nhập email khác!',
         ];
     }
 }

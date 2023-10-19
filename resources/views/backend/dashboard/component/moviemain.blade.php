@@ -4,18 +4,21 @@
         <div class="col-lg-12">
             <div class="ibox">
                 <div class="ibox-title text-right">
-                    <div class="ibox-content">
-                        <form role="form" class="form-inline">
+                    <div class="ibox-content row">
+                        <form method="GET" role="form" class="form-inline col-md-11" action="{{ route('movie.movie.ad-search') }}">
                             <a href="{{ route('movie.movie.add') }}">
-                                <button class="btn btn-success " type="button"><i class="fa fa-plus"></i>&nbsp;&nbsp;<span class="bold">Add new movie</span></button>
+                                <button class="btn btn-success "><i class="fa fa-plus"></i>&nbsp;&nbsp;<span class="bold">Add new movie</span></button>
                             </a>
                             <div class="form-group">
-                                <input type="text" placeholder="Enter name movie" class="form-control">
+                                <input type="text" placeholder="Enter the movie" name="searchname" class="form-control">
                             </div>
                             <a href="">
-                                <button class="btn btn-primary" type="button"><i class="fa fa-search"></i></button>
+                                <button class="btn btn-primary" type="submit"><i class="fa fa-search"></i></button>
                             </a>
                         </form>
+                        <a href="{{ route('movie.dashboard.movie') }}" class="col-md-1">
+                            <button class="btn btn-warning"><i class="fa fa-undo"></i></button>
+                        </a>
                     </div>
                 </div>
                 <div class="ibox-content">
@@ -36,8 +39,8 @@
                         </thead>
 
                         <tbody>
-                            @isset ($movies)
-                                @foreach ($movies as $movie)
+                            @if (isset($adsearch))
+                                @foreach ($adsearch as $movie)
                                     <tr>
                                         <td>{{ $movie->movie_id }}</td>
                                         <td><img src="{{ $movie->picture }}" alt="{{ $movie->name }}" width="80px" height="100px"></td>
@@ -53,11 +56,29 @@
                                         </td>
                                     </tr>
                                 @endforeach
-                            @endisset
+                            @else  
+                                @foreach ($movies as $movie)
+                                    <tr>
+                                        <td>{{ $movie->movie_id }}</td>
+                                        <td><img src="{{ $movie->picture }}" alt="{{ $movie->name }}" width="80px" height="100px"></td>
+                                        <td>{{ $movie->name }}</td>
+                                        <td>{{ $movie->description }}</td>
+                                        <td>{{ $movie->source }}</td>
+                                        <td>{{ $movie->release_date }}</td>
+                                        <td>{{ $movie->runtime }}</td>
+                                        <td>{{ $movie->category }}</td>
+                                        <td class="text-right">
+                                            <a href="{{ route('movie.movie.edit', ['id' => $movie->movie_id ])}}" class="btn btn-success"><i class="fa fa-edit"></i></a>
+                                            <a onclick="return confirm('Bạn có chắc chắn muốn xoá?')"  href="{{ route('movie.movie.delete', ['id' => $movie->movie_id ])}}" class="btn btn-danger"><i class="fa fa-trash"></i></a>
+                                        </td>
+                                    </tr>
+                                    @endforeach
+                                {{ $movies->links() }}
+                            @endif
                         </tbody>
                     </table>
 
-                    {{ $movies->links('pagination::bootstrap-4') }}
+                    {{-- {{ $movies->links('pagination::bootstrap-4') }} --}}
                 </div>
             </div>
         </div>

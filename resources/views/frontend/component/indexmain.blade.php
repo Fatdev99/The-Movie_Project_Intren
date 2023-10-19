@@ -26,6 +26,7 @@
                                 <a
                                     href="{{ route('movie.movie.detail', $trend->movie_id) }}"
                                     class="min-w-[150px] group relative hover:shadow-lg transition-transform transform hover:translate-y-[-4px]"
+                                    style=""
                                 >
                                     <div class="product-item--img relative">
                                         <img

@@ -17,8 +17,12 @@ class AppServiceProvider extends ServiceProvider
     /**
      * Bootstrap any application services.
      */
-    public function boot(): void
+    public function boot()
     {
-        //
+        view()->composer('*', function($view){
+            $view_name = str_replace('.', '-', $view->getName());
+            view()->share('view_name', $view_name);
+        });
+
     }
 }

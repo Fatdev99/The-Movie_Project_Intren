@@ -23,7 +23,7 @@
     <div id="wrapper">
         @include('backend.dashboard.component.sidebar')
 
-        <div id="page-wrapper" class="gray-bg" style="height: 980px">
+        <div id="page-wrapper" class="gray-bg">
             @include('backend.dashboard.component.nav')
 
             <div class="row wrapper border-bottom white-bg page-heading">

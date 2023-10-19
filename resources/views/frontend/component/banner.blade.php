@@ -11,25 +11,23 @@
                     Millions of movies, TV shows and people to discover. Explore now.
                 </h3>
 
-                <form class="relative mt-6" action="/search" method="get">
+                <form class="relative mt-6" action="{{ route('movie.movie.searchIndex') }}" method="GET">
                     <input
-                        class="w-full h-[46px] text-base text-[rgba(0,0,0,0.5)] bg-white px-5 rounded-[30px] border-[none]"
+                        class="typehead w-full h-[46px] text-base text-[rgba(0,0,0)] bg-white px-5 rounded-[30px] border-[none]"
                         dir="auto"
                         name="query"
+                        id="search"
                         type="text"
                         tabindex="1"
-                        autoCorrect="off"
-                        autofill="off"
-                        autocomplete="off"
-                        spellcheck="false"
                         placeholder="Search..."
-                    />
+                        autocomplete
+                    >
 
-                    <input
-                        class="absolute right-0 h-[46px] font-semibold text-white bg-gradient-to-r from-teal-500 to-blue-500 w-32 ml-2 border-none rounded-full"
+                    <button class="absolute right-0 h-[46px] font-semibold text-white bg-gradient-to-r from-teal-500 to-blue-500 w-32 ml-2 border-none rounded-full"
                         type="submit"
-                        value="Search"
-                    />
+                    >
+                        Search
+                    </button>
                 </form>
             </div>
-        </header>
+</header>

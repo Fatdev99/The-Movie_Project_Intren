@@ -5,9 +5,9 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Movies;
-use Illuminate\Support\Facades\Hash;
-use App\Http\Requests\RegisterRequest;
+use App\Http\Requests\MovieRequest;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\DB;
 
 class MovieController extends Controller
 {
@@ -17,6 +17,8 @@ class MovieController extends Controller
 
     public function Index_admin(){
         $movies = Movies::paginate(10);
+
+        //dd($movies);
 
         return view('backend.dashboard.movieindex', compact('movies'));
     }
@@ -36,24 +38,47 @@ class MovieController extends Controller
         //dd($mvlist);
 
         $tvlist = Movies::whereCategory('tvShow')->get();
-        //dd($mvlist);
+        //dd($tvlist);
 
         if(Route::currentRouteName() == 'movie.movie.list'){
 
             return view('frontend.layout.list', compact('mvlist'));
         }
+        else
+            return view('frontend.layout.list', compact('tvlist'));
 
-        return view('frontend.layout.list', compact('tvlist'));
     }
 
     public function detail($m_id){
         $movies = Movies::findOrFail($m_id);
 
-        return view('frontend.layout.detail', compact('movies'));
+        $m_actors = DB::table('movie_actor')
+            ->join('movies', 'movie_actor.movie_id', '=', 'movies.movie_id')
+            ->join('actors', 'movie_actor.actor_id', '=', 'actors.actor_id')
+            ->select('actors.actor_name')
+            ->where('movie_actor.movie_id', '=', $m_id)
+            ->get();
+
+        return view('frontend.layout.detail', compact('movies', 'm_actors'));
     }
 
     public function play($m_id){
         $movies = Movies::findOrFail($m_id);
+        //dd($movies);
+
+        $check = DB::table('watched_movie')
+            ->select('watched_movie.movie_id', 'watched_movie.user_id')
+            ->where('watched_movie.movie_id', '=', $m_id, 'and', 'watched_movie.user_id', '=', Auth()->user()->id)
+            ->get();
+
+        //dd($check);
+
+        if ($check->movie_id == null) {
+            $add = DB::table('watched_movie')->insert(
+                ['user_id' => Auth()->user()->id, 'movie_id' => $movies->movie_id]
+            );
+        }
+        
 
         return view('frontend.layout.playmovie', compact('movies'));
     }
@@ -78,15 +103,15 @@ class MovieController extends Controller
 
 
     /**
-     * Update user.
+     * Update movie.
      *
      */
-    public function update(Request $request,string $m_id){
+    public function update(MovieRequest $request, $m_id){
         $movies = Movies::findOrFail($m_id);
 
         $movies->name = $request->input('name');
-        $movies->release_date = $request->input('release_date');
-        $movies->runtime = $request->input('runtime');
+        $movies->release_date = $request->input('releaseyear');
+        $movies->runtime = $request->input('duration');
         $movies->description = $request->input('description');
         $movies->category = $request->input('category');
         $movies->picture = $request->input('picture');
@@ -94,21 +119,55 @@ class MovieController extends Controller
 
         $movies->update();
         
-        return redirect()->back()->with('success', 'Cập nhật thông tin phim thành công');
+        return redirect()->route('movie.dashboard.movie')->with('success', 'Cập nhật thông tin phim thành công');
     }
 
     public function add(){
         return view('backend.dashboard.movieadd');
     }
 
-    public function store(Request $request){
+    public function store(MovieRequest $request){
 
         $movie = Movies::create($request->validated());
 
         if ($movie){
-            return redirect()->route('movie.dashboard.movie')->with('success', "Đăng kí tài khoản thành công");
+            return redirect()->route('movie.dashboard.movie')->with('success', "Tạo phim mới thành công");
         }
 
-        return redirect()->route('movie.movie.add')->with('error', "Đăng kí tài khoản không thành công");
+        return redirect()->route('movie.movie.add')->with('error', "TTạo phim mới không thành công");
+    }
+
+    public function admin_search(Request $request){
+        $adsearch = Movies::whereName($request->input('searchname'))->get();
+        //dd($adsearch);
+
+        return view('backend.dashboard.movieindex', compact('adsearch'));
+
+    }
+
+    public function searchMovie(Request $request){
+
+        $mvsearch = Movies::where([['name', 'like', '%' . $request->input('searchname') . '%'], ['category', '=', 'movie']])->get();
+        //dd($mvsearch);
+
+        return view('frontend.layout.list', compact('mvsearch'));
+        
+    }
+
+    public function searchTVshow(Request $request){
+
+        $tvsearch = Movies::where([['name', 'like', '%' . $request->input('searchname') . '%'], ['category', '=', 'tvShow']])->get();
+        //dd($tvsearch);
+
+        return view('frontend.layout.list', compact('tvsearch'));
+    
+    }
+
+    public function searchIndex(Request $request)
+    {
+        $movie = Movies::where('name', 'like', '%'. $request->input('query') . '%')->get();
+        //dd($movie);
+     
+        return view('frontend.layout.searchlist', compact('movie'));
     }
 }

@@ -66,7 +66,7 @@
                     </li>
 
                     <li class="nav-list-container--item group relative">
-                        <a href="{{ route('movie.actor') }}">People</a>
+                        <a href="{{ route('movie.actor.index') }}">People</a>
                         <div
                             class="absolute w-[86px] z-10 hidden flex-col gap-2.5 px-[22px] py-[18px] rounded-xl -left-1.5 top-[18px] bg-transparent group-hover:flex"
                         ></div>
@@ -75,7 +75,7 @@
                         >
                             <a
                                 class="text-black text-base font-normal mb-2"
-                                href="{{ route('movie.actor') }}"
+                                href="{{ route('movie.actor.index') }}"
                             >Popular</a
                             >
                         </div>
@@ -134,7 +134,7 @@
 
                     @if (auth() -> check())
                         <li class="nav-list-container--item group relative">
-                            <a href="">Hi, {{ Auth::user()->name }}</a>
+                            <a href="#">Hi, {{ Auth::user()->name }}</a>
                             
                             <div
                                 class="absolute w-[86px] z-10 hidden flex-col gap-2.5 px-[22px] py-[18px] rounded-xl -left-1.5 top-[18px] bg-transparent group-hover:flex"
@@ -143,17 +143,27 @@
                             @if (Auth::id() == 1 || Auth::user()->email == 'admin@gmail.com')
 
                                 <div
-                                    class="absolute border border-[#ccc] shadow-md text-black w-[141px] z-10 hidden flex-col gap-2.5 items-start justify-center px-[22px] py-[18px] rounded-xl -left-1.5 top-[198%] bg-white group-hover:flex"
+                                    class="absolute border border-[#ccc] shadow-md text-black w-[165px] z-10 hidden flex-col gap-2.5 items-start justify-center px-[22px] py-[18px] rounded-xl -left-1.5 top-[198%] bg-white group-hover:flex"
                                 >
                                     <a
                                         class="text-black text-base font-normal mb-2"
                                         href="{{ route('movie.user.edit', Auth::id()) }}"
-                                    >My Profile
+                                    ><i class="fa fa-user"></i> <span class="nav-label">My Profile</span>
                                     </a>
                                     <a
                                         class="text-black text-base font-normal mb-2"
                                         href="{{ route('movie.dashboard.index')}}"
                                     >Dashboard
+                                    </a>
+                                    <a
+                                        class="text-black text-base font-normal mb-2"
+                                        href=""
+                                    >Favorite Movie
+                                    </a>
+                                    <a
+                                        class="text-black text-base font-normal mb-2"
+                                        href=""
+                                    >Watched Movie
                                     </a>
                                     <a
                                         class="text-black text-base font-normal mb-2"
@@ -164,12 +174,22 @@
                             @else
 
                                 <div
-                                    class="absolute border border-[#ccc] shadow-md text-black w-[141px] z-10 hidden flex-col gap-2.5 items-start justify-center px-[22px] py-[18px] rounded-xl -left-1.5 top-[198%] bg-white group-hover:flex"
+                                    class="absolute border border-[#ccc] shadow-md text-black w-[165px] z-10 hidden flex-col gap-2.5 items-start justify-center px-[22px] py-[18px] rounded-xl -left-1.5 top-[198%] bg-white group-hover:flex"
                                 >
                                     <a
                                         class="text-black text-base font-normal mb-2"
                                         href="{{ route('movie.user.edit', Auth::id()) }}"
                                     >My Profile
+                                    </a>
+                                    <a
+                                        class="text-black text-base font-normal mb-2"
+                                        href=""
+                                    >Favorite Movie
+                                    </a>
+                                    <a
+                                        class="text-black text-base font-normal mb-2"
+                                        href=""
+                                    >Watched Movie
                                     </a>
                                     <a
                                         class="text-black text-base font-normal mb-2"
@@ -179,6 +199,9 @@
                                 </div>
                             @endif
                             
+                        </li>
+                        <li>
+                            <a href="{{ route('movie.user.register')}}">Register</a>
                         </li>
                     @else
                         <li>

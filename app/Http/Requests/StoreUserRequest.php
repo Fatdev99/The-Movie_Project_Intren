@@ -23,7 +23,7 @@ class StoreUserRequest extends FormRequest
     {
         return [
             'name' => 'required|min:8',
-            'phone' => 'required|numeric',
+            'phone' => 'required|min:8',
             'address' => 'required',
             'email' => 'required|email|string|unique:users',
             'password' => 'required|string|min:8',

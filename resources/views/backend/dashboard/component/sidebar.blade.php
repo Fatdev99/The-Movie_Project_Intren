@@ -13,7 +13,7 @@
                             @if (auth()->user()->id == 1 || auth()->user()->email == 'admin@gmail.com')
                                 <span class="text-muted text-xs block">Admin</span> 
                             @else
-                            <span class="text-muted text-xs block">user</span> 
+                            <span class="text-muted text-xs block">User</span> 
                             @endif
                         </span> 
                     </a>
