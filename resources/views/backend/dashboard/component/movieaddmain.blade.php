@@ -22,11 +22,11 @@
                         </div>
                         <div class="hr-line-dashed" style="margin: 17px 0"></div>
 
-                        <div class="form-group"><label class="col-sm-2 control-label">Release Date</label>
+                        <div class="form-group"><label class="col-sm-2 control-label">Release Year</label>
 
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" name="release_date" placeholder="Release date. ex: 15-11-2011" value="">
-                                @if ($errors->has('release_date'))
+                                <input type="text" class="form-control" name="releaseyear" placeholder="Release year. ex: 2011" value="">
+                                @if ($errors->has('releaseyear'))
                                     <span class="error-message">* {{$errors->first('release_date')}}</span>
                                 @endif
                             </div>
@@ -36,8 +36,8 @@
                         <div class="form-group"><label class="col-sm-2 control-label">Runtime</label>
 
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" name="runtime" placeholder="Run time" value="">
-                                @if ($errors->has('runtime'))
+                                <input type="text" class="form-control" name="duration" placeholder="Run time" value="">
+                                @if ($errors->has('duration'))
                                     <span class="error-message">* {{$errors->first('runtime')}}</span>
                                 @endif
                             </div>

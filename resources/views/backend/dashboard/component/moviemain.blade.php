@@ -5,10 +5,12 @@
             <div class="ibox">
                 <div class="ibox-title text-right">
                     <div class="ibox-content row">
-                        <form method="GET" role="form" class="form-inline col-md-11" action="{{ route('movie.movie.ad-search') }}">
+                        <div class="col-md-8">
                             <a href="{{ route('movie.movie.add') }}">
                                 <button class="btn btn-success "><i class="fa fa-plus"></i>&nbsp;&nbsp;<span class="bold">Add new movie</span></button>
                             </a>
+                        </div>
+                        <form method="GET" role="form" class="form-inline col-md-3" action="{{ route('movie.movie.ad-search') }}">
                             <div class="form-group">
                                 <input type="text" placeholder="Enter the movie" name="searchname" class="form-control">
                             </div>
@@ -31,8 +33,8 @@
                             <th>Name</th>
                             <th data-hide="all">Description</th>
                             <th data-hide="all">Source</th>
-                            <th>Release Date</th>
-                            <th>Runtime</th>
+                            <th>Release Year</th>
+                            <th>Duration</th>
                             <th>Categogy</th>
                             <th class="text-right">Action</th>
                         </tr>
@@ -47,8 +49,8 @@
                                         <td>{{ $movie->name }}</td>
                                         <td>{{ $movie->description }}</td>
                                         <td>{{ $movie->source }}</td>
-                                        <td>{{ $movie->release_date }}</td>
-                                        <td>{{ $movie->runtime }}</td>
+                                        <td>{{ $movie->releaseyear }}</td>
+                                        <td>{{ $movie->duration }}</td>
                                         <td>{{ $movie->category }}</td>
                                         <td class="text-right">
                                             <a href="{{ route('movie.movie.edit', ['id' => $movie->movie_id ])}}" class="btn btn-success"><i class="fa fa-edit"></i></a>
@@ -64,8 +66,8 @@
                                         <td>{{ $movie->name }}</td>
                                         <td>{{ $movie->description }}</td>
                                         <td>{{ $movie->source }}</td>
-                                        <td>{{ $movie->release_date }}</td>
-                                        <td>{{ $movie->runtime }}</td>
+                                        <td>{{ $movie->releaseyear }}</td>
+                                        <td>{{ $movie->duration }}</td>
                                         <td>{{ $movie->category }}</td>
                                         <td class="text-right">
                                             <a href="{{ route('movie.movie.edit', ['id' => $movie->movie_id ])}}" class="btn btn-success"><i class="fa fa-edit"></i></a>

@@ -17,7 +17,7 @@
             </div>
             <div class="mt-[30px] pt-0 pb-[21px] px-2.5">
               <h4 class="text-16 font-semibold">{{ $mvl->name }}</h4>
-            <span class="text-sm  text-[#686868]">{{ $mvl->release_date }}</span>
+            <span class="text-sm  text-[#686868]">{{ $mvl->releaseyear }}</span>
             </div>
           </a>
         @endforeach
@@ -39,7 +39,7 @@
               </div>
               <div class="mt-[30px] pt-0 pb-[21px] px-2.5">
                 <h4 class="text-16 font-semibold">{{ $mvl->name }}</h4>
-              <span class="text-sm  text-[#686868]">{{ $mvl->release_date }}</span>
+              <span class="text-sm  text-[#686868]">{{ $mvl->releaseyear }}</span>
               </div>
             </a>
           @endforeach

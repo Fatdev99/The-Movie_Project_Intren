@@ -30,10 +30,10 @@
                         </div>
                         <div class="hr-line-dashed" style="margin: 17px 0"></div>
 
-                        <div class="form-group"><label class="col-sm-2 control-label">Release Date</label>
+                        <div class="form-group"><label class="col-sm-2 control-label">Release Year</label>
 
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" name="release_date" placeholder="Release date. ex: 15-11-2011" value="{{ $movies->release_date }}">
+                                <input type="text" class="form-control" name="releaseyear" placeholder="Release date. ex: 15-11-2011" value="{{ $movies->release_date }}">
                                 @if ($errors->has('release_date'))
                                     <span class="error-message">* {{$errors->first('release_date')}}</span>
                                 @endif
@@ -41,12 +41,12 @@
                         </div>
                         <div class="hr-line-dashed" style="margin: 17px 0"></div>
 
-                        <div class="form-group"><label class="col-sm-2 control-label">Runtime</label>
+                        <div class="form-group"><label class="col-sm-2 control-label">Duration</label>
 
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" name="runtime" placeholder="Run time" value="{{ $movies->runtime }}">
-                                @if ($errors->has('runtime'))
-                                    <span class="error-message">* {{$errors->first('runtime')}}</span>
+                                <input type="text" class="form-control" name="duration" placeholder="Duration" value="{{ $movies->duration }}">
+                                @if ($errors->has('duration'))
+                                    <span class="error-message">* {{$errors->first('duration')}}</span>
                                 @endif
                             </div>
                         </div>

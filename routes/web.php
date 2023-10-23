@@ -57,7 +57,7 @@ Route::controller(MovieController::class)->group(function() {
     Route::get('/movie', 'list')->name('movie.movie.list');
     Route::get('/tvShow', 'list')->name('movie.movie.tvShow');
     Route::get('/movie/detail/{id}', 'detail')->name('movie.movie.detail');
-    Route::get('/movie/play/{id}', 'play')->name('movie.movie.play');
+    Route::get('/movie/play/{id}', 'play_movie')->name('movie.movie.play');
     Route::get('/dashboard/movie', 'Index_admin')->name('movie.dashboard.movie')->middleware(AuthMiddleware::class);
     Route::get('/movie/add', 'add')->name('movie.movie.add');
     Route::post('/movie/store', 'store')->name('movie.movie.store');
@@ -68,6 +68,8 @@ Route::controller(MovieController::class)->group(function() {
     Route::get('/movie/search', 'searchMovie')->name('movie.movie.mv-search');
     Route::get('tvShow/search', 'searchTVshow')->name('movie.movie.tv-search');
     Route::get('/search', 'searchIndex')->name('movie.movie.searchIndex');
+    Route::get('/history', 'Index_History')->name('movie.movie.history');
+    Route::get('/favorite', 'Index_Favorite')->name('movie.movie.favorite');
 });
 
  // ROUTE ACTOR CONTROLLER //

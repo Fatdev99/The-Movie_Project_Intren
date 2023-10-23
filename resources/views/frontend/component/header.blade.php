@@ -152,22 +152,22 @@
                                     </a>
                                     <a
                                         class="text-black text-base font-normal mb-2"
-                                        href="{{ route('movie.dashboard.index')}}"
+                                        href="{{ route('movie.dashboard.index') }}"
                                     >Dashboard
                                     </a>
                                     <a
                                         class="text-black text-base font-normal mb-2"
-                                        href=""
+                                        href="{{ route('movie.movie.favorite') }}"
                                     >Favorite Movie
                                     </a>
                                     <a
                                         class="text-black text-base font-normal mb-2"
-                                        href=""
-                                    >Watched Movie
+                                        href="{{ route('movie.movie.history') }}"
+                                    >History
                                     </a>
                                     <a
                                         class="text-black text-base font-normal mb-2"
-                                        href="{{ route('movie.logout')}}"
+                                        href="{{ route('movie.logout') }}"
                                     >Log out
                                     </a>
                                 </div>
@@ -183,13 +183,13 @@
                                     </a>
                                     <a
                                         class="text-black text-base font-normal mb-2"
-                                        href=""
+                                        href="{{ route('movie.movie.favorite') }}"
                                     >Favorite Movie
                                     </a>
                                     <a
                                         class="text-black text-base font-normal mb-2"
-                                        href=""
-                                    >Watched Movie
+                                        href="{{ route('movie.movie.history') }}"
+                                    >History
                                     </a>
                                     <a
                                         class="text-black text-base font-normal mb-2"

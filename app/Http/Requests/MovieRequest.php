@@ -24,8 +24,8 @@ class MovieRequest extends FormRequest
         //dd($this->route('id'));
         return [
             'name' => 'required',
-            'release_date' => 'required',
-            'runtime' => 'required|numeric',
+            'releaseyear' => 'required',
+            'duration' => 'required|numeric',
             'description' => '', 
             'category' => 'required', 
             'picture' => 'required|string', 
@@ -38,9 +38,9 @@ class MovieRequest extends FormRequest
     {
         return [
             'name.required' => 'Bạn chưa nhập vào tên phim!',
-            'release_date.required' => 'Bạn chưa nhập vào ngày ra mắt bộ phim!',
-            'runtime.required' => 'Bạn chưa nhập vào thời lượng phim!',
-            'runtime.numeric' => 'Thời lượng phim phải là số!',
+            'releaseyear.required' => 'Bạn chưa nhập vào ngày ra mắt bộ phim!',
+            'duration.required' => 'Bạn chưa nhập vào thời lượng phim!',
+            'duration.numeric' => 'Thời lượng phim phải là số!',
             'category.required' => 'Bạn chưa chọn dòng phim!',
             'picture.required' => 'Bạn chưa nhập vào link ảnh poster của phim!',
             'picture.string' => 'Đường dẫn phải là một chuỗi!',

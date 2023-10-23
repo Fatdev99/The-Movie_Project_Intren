@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Movies;
 use App\Http\Requests\MovieRequest;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class MovieController extends Controller
@@ -31,6 +32,30 @@ class MovieController extends Controller
         //dd($popular);
 
         return view('frontend.layout.index', compact('trending', 'popular'));
+    }
+
+    public function Index_History(){
+
+        $movies = DB::table('watched_movie')
+            ->join('movies', 'watched_movie.movie_id', '=', 'movies.movie_id')
+            ->join('users', 'watched_movie.user_id', '=', 'users.user_id')
+            ->select('movies.*')
+            ->where('watched_movie.user_id', '=', Auth::user()->user_id)
+            ->get();
+
+        return view('frontend.layout.history', compact('movies'));
+    }
+
+    public function Index_Favorite(){
+
+        $movies = DB::table('favorite_movie')
+            ->join('movies', 'favorite_movie.movie_id', '=', 'movies.movie_id')
+            ->join('users', 'favorite_movie.user_id', '=', 'users.user_id')
+            ->select('movies.*')
+            ->where('favorite_movie.user_id', '=', Auth::user()->user_id)
+            ->get();
+
+        return view('frontend.layout.favorite', compact('movies'));
     }
 
     public function list(){
@@ -62,23 +87,25 @@ class MovieController extends Controller
         return view('frontend.layout.detail', compact('movies', 'm_actors'));
     }
 
-    public function play($m_id){
+    public function play_movie($m_id){
         $movies = Movies::findOrFail($m_id);
         //dd($movies);
 
-        $check = DB::table('watched_movie')
+        if (isset(Auth::user()->user_id)) {
+
+            $check = DB::table('watched_movie')
             ->select('watched_movie.movie_id', 'watched_movie.user_id')
-            ->where('watched_movie.movie_id', '=', $m_id, 'and', 'watched_movie.user_id', '=', Auth()->user()->id)
+            ->where([['watched_movie.movie_id', '=', $m_id], ['watched_movie.user_id', '=', Auth::user()->user_id]])
             ->get();
+            //dd($check);
 
-        //dd($check);
-
-        if ($check->movie_id == null) {
-            $add = DB::table('watched_movie')->insert(
-                ['user_id' => Auth()->user()->id, 'movie_id' => $movies->movie_id]
-            );
+            // Ở đây em nên dùng hàm nào để kiểm tra $check có giá trị trả về không ạ??
+            if ($check = []) {
+                $add = DB::table('watched_movie')->insert(
+                    ['user_id' => Auth::user()->user_id, 'movie_id' => $m_id]
+                );
+            }
         }
-        
 
         return view('frontend.layout.playmovie', compact('movies'));
     }
@@ -110,8 +137,8 @@ class MovieController extends Controller
         $movies = Movies::findOrFail($m_id);
 
         $movies->name = $request->input('name');
-        $movies->release_date = $request->input('releaseyear');
-        $movies->runtime = $request->input('duration');
+        $movies->releaseyear = $request->input('releaseyear');
+        $movies->duration = $request->input('duration');
         $movies->description = $request->input('description');
         $movies->category = $request->input('category');
         $movies->picture = $request->input('picture');
@@ -134,7 +161,7 @@ class MovieController extends Controller
             return redirect()->route('movie.dashboard.movie')->with('success', "Tạo phim mới thành công");
         }
 
-        return redirect()->route('movie.movie.add')->with('error', "TTạo phim mới không thành công");
+        return redirect()->route('movie.movie.add')->with('error', "Tạo phim mới không thành công");
     }
 
     public function admin_search(Request $request){
@@ -147,8 +174,74 @@ class MovieController extends Controller
 
     public function searchMovie(Request $request){
 
-        $mvsearch = Movies::where([['name', 'like', '%' . $request->input('searchname') . '%'], ['category', '=', 'movie']])->get();
-        //dd($mvsearch);
+        $mvsearch = Movies::where([['name','LIKE','%'.$request->input('searchname').'%'],
+            ['category', '=', 'movie']
+            ])->get();
+
+        // if ($request->input('searchname') != '') {
+
+        //     if ($request->input('searchfrom') != '' && $request->input('searchto') != '') {
+
+        //         $mvsearch = Movies::where([
+        //                 ['name', 'like', '%' . $request->input('searchname') . '%'],
+        //                 ['category', '=', 'movie'],
+        //                 ['releaseyear','>=', $request->input('searchfrom')],
+        //                 ['releaseyear','<=', $request->input('searchto')],
+        //             ])->get();
+        //         //dd($mvsearch);
+        //     }
+        //     elseif ($request->input('searchfrom') != '' && $request->input('searchto') == '') {
+
+        //         $mvsearch = Movies::where([
+        //                 ['name','like', '%' . $request->input('searchname') . '%'],
+        //                 ['category','=', 'movie'],
+        //                 ['releaseyear','>=', $request->input('searchfrom')],
+        //             ])->get();
+        //     }
+        //     elseif ($request->input('searchfrom') == '' && $request->input('searchto') != '') {
+
+        //         $mvsearch = Movies::where([
+        //                 ['name','like', '%' . $request->input('searchname') . '%'],
+        //                 ['category','=', 'movie'],
+        //                 ['releaseyear','<=', $request->input('searchto')],
+        //             ])->get();
+        //     }
+        //     else{
+        //         $mvsearch = Movies::where([
+        //                 ['name','like', '%' . $request->input('searchname')],
+        //                 ['category','=','movie']
+        //             ])->get();
+        //     }
+
+        // }
+        // else{
+            
+        //     if ($request->input('searchfrom') != '' && $request->input('searchto') != '') {
+
+        //         $mvsearch = Movies::where([
+        //                 ['category', '=', 'movie'],
+        //                 ['releaseyear','>=', $request->input('searchfrom')],
+        //                 ['releaseyear','<=', $request->input('searchto')],
+        //             ])->get();
+        //         dd($mvsearch);
+        //     }
+        //     elseif ($request->input('searchfrom') != '' && $request->input('searchto') == '') {
+
+        //         $mvsearch = Movies::where([
+        //                 ['category','=', 'movie'],
+        //                 ['releaseyear','>=', $request->input('searchfrom')],
+        //             ])->get();
+        //     }
+        //     elseif ($request->input('searchfrom') == '' && $request->input('searchto') != '') {
+
+        //         $mvsearch = Movies::where([
+        //                 ['category','=', 'movie'],
+        //                 ['releaseyear','<=', $request->input('searchto')],
+        //             ])->get();
+        //     }
+
+        // }
+
 
         return view('frontend.layout.list', compact('mvsearch'));
         
