@@ -70,6 +70,8 @@ Route::controller(MovieController::class)->group(function() {
     Route::get('/search', 'searchIndex')->name('movie.movie.searchIndex');
     Route::get('/history', 'Index_History')->name('movie.movie.history');
     Route::get('/favorite', 'Index_Favorite')->name('movie.movie.favorite');
+    Route::get('/favorite/add/{id}', 'favoriteMovie')->name('movie.movie.addfavorite');
+
 });
 
  // ROUTE ACTOR CONTROLLER //

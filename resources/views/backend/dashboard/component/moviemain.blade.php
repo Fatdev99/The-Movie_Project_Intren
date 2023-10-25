@@ -36,6 +36,7 @@
                             <th>Release Year</th>
                             <th>Duration</th>
                             <th>Categogy</th>
+                            {{-- <th>Genre</th> --}}
                             <th class="text-right">Action</th>
                         </tr>
                         </thead>
@@ -52,6 +53,13 @@
                                         <td>{{ $movie->releaseyear }}</td>
                                         <td>{{ $movie->duration }}</td>
                                         <td>{{ $movie->category }}</td>
+                                        {{-- <td>
+                                            @isset($m_genre)
+                                                @foreach($m_genre as $m_gen)
+                                                    {{ $m_gen->genre_name }}
+                                                @endforeach
+                                            @endisset
+                                        </td> --}}
                                         <td class="text-right">
                                             <a href="{{ route('movie.movie.edit', ['id' => $movie->movie_id ])}}" class="btn btn-success"><i class="fa fa-edit"></i></a>
                                             <a onclick="return confirm('Bạn có chắc chắn muốn xoá?')"  href="{{ route('movie.movie.delete', ['id' => $movie->movie_id ])}}" class="btn btn-danger"><i class="fa fa-trash"></i></a>
@@ -69,6 +77,13 @@
                                         <td>{{ $movie->releaseyear }}</td>
                                         <td>{{ $movie->duration }}</td>
                                         <td>{{ $movie->category }}</td>
+                                        {{-- <td>
+                                            @isset($m_genre)
+                                                @foreach($m_genre as $m_gen)
+                                                    {{ $m_gen->genre_name }}
+                                                @endforeach
+                                            @endisset
+                                        </td> --}}
                                         <td class="text-right">
                                             <a href="{{ route('movie.movie.edit', ['id' => $movie->movie_id ])}}" class="btn btn-success"><i class="fa fa-edit"></i></a>
                                             <a onclick="return confirm('Bạn có chắc chắn muốn xoá?')"  href="{{ route('movie.movie.delete', ['id' => $movie->movie_id ])}}" class="btn btn-danger"><i class="fa fa-trash"></i></a>
@@ -80,7 +95,7 @@
                         </tbody>
                     </table>
 
-                    {{-- {{ $movies->links('pagination::bootstrap-4') }} --}}
+                    {{-- {{ $movies->links('pagination::bootstrap-5') }} --}}
                 </div>
             </div>
         </div>

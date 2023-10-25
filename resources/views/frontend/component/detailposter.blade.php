@@ -31,9 +31,14 @@
                 PG - 13
               </span>
               <span class="date">{{ $movies->releaseyear }} (US)</span>
-              <span class="category poster-facts--relative relative ml-[6px]"
-                >Phim Hành Động, Phim Bí Ẩn, Phim Gây Cấn, Phim Hình Sự</span
-              >
+              <span class="category poster-facts--relative relative ml-[6px]">
+                Genre: 
+                @isset($m_genre)
+                  @foreach($m_genre as $m_g)
+                    {{ $m_g->genre_name }}
+                  @endforeach
+                @endisset
+              </span>
               <span class="runtime poster-facts--relative relative ml-[6px]"
                 >{{ $movies->convertMinutesToHours($movies->duration) }}</span
               >
@@ -56,62 +61,16 @@
                     Score
                   </p>
                 </li>
+                
                 <li class="poster-item flex items-center">
                   <a
-                    href="#"
-                    class="poster-item--link bg-opacity-100 bg-[#032541] rounded-full w-12 h-12 flex justify-center items-center text-2xl font-bold"
-                  >
-                    <img
-                      src="https://www.themoviedb.org/assets/2/v4/glyphicons/basic/glyphicons-basic-159-thumbnails-list-white-c260ea972eebf812289fd3c41d0d2c1dff33ecbcd62be13fba8eeaf9de173789.svg"
-                      alt="" 
-                      class="w-4 h-4"
-
-                    />
-                  </a>
-                </li>
-                <li class="poster-item flex items-center">
-                  <a
-                    href="#"
+                    href="{{ route('movie.movie.addfavorite', $movies->movie_id) }}"
                     class="poster-item--link bg-opacity-100 bg-[#032541] rounded-full w-12 h-12 flex justify-center items-center text-2xl font-bold"
                   >
                     <img
                       src="https://www.themoviedb.org/assets/2/v4/glyphicons/basic/glyphicons-basic-13-heart-white-28d2cc2d6418c5047efcfd2438bfc5d109192671263c270993c05f130cc4584e.svg"
                       alt=""
                       class="w-4 h-4"
-                    />
-                  </a>
-                </li>
-                <li class="poster-item flex items-center">
-                  <a
-                    href="#"
-                    class="poster-item--link bg-opacity-100 bg-[#032541] rounded-full w-12 h-12 flex justify-center items-center text-2xl font-bold"
-                  >
-                    <img
-                      src="https://www.themoviedb.org/assets/2/v4/glyphicons/basic/glyphicons-basic-73-bookmark-white-432e98d550b7e4c80b06272c49475b0db85a60f6fae450420713004b3c9d3ffd.svg"
-                      alt="" 
-                      class="w-4 h-4"
-
-                    />
-                  </a>
-                </li>
-                <li class="poster-item flex items-center">
-                  <a
-                    href="#"
-                    class="poster-item--link bg-opacity-100 bg-[#032541] rounded-full w-12 h-12 flex justify-center items-center text-2xl font-bold"
-                  >
-                    <img
-                      src="https://www.themoviedb.org/assets/2/v4/glyphicons/basic/glyphicons-basic-49-star-white-5c85220678b312aea9599d5f12ad858a9e7df226de51ef8b6b699023ffeda5fa.svg"
-                      alt="" 
-                      class="w-4 h-4"
-
-                    />
-                  </a>
-                </li>
-                <li class="poster-item flex items-center">
-                  <a href="#" class="font-bold">
-                    <img
-                      src="https://www.themoviedb.org/assets/2/v4/glyphicons/basic/glyphicons-basic-175-play-806cb05551791b8dedd7f8d38fd3bd806e2d397fcfeaa00a5cc9129f0819fd07.svg"
-                      alt=""
                     />
                   </a>
                 </li>
@@ -171,7 +130,7 @@
                     Play Trailer
                   </a>
                   <span class="text-gray-200 text-base leading-7" style="margin-top: 10px">
-                    <a class="text-blue-500" href="{{ route('movie.login') }}">Đăng nhập</a> để xem toàn bộ bộ phim này
+                    <a class="text-blue-500" href="{{ route('movie.login') }}">Login</a> to watch full movie
                   </span>
                 @endif
               </div>

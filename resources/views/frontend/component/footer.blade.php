@@ -21,7 +21,7 @@
                 THE BASICS
             </h5>
             <ul class="footer-column--title">
-                <li><a href="#!" class="text-white">Giới thiệu về TMDB</a></li>
+                <li><a href="#!" class="text-white">About TMDB</a></li>
                 <li><a href="#!" class="text-white">Contact Us</a></li>
                 <li><a href="#!" class="text-white">Support Forums</a></li>
                 <li><a href="#!" class="text-white">API</a></li>

@@ -35,7 +35,7 @@
           @if(isset($mvsearch) || isset($tvsearch))
             @include('frontend.component.listsearch')
           @else
-          @include('frontend.component.listmain')
+            @include('frontend.component.listmain')
           @endif
         </div>
       </div>

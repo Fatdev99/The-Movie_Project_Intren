@@ -106,7 +106,7 @@ class UserController extends Controller
     }
 
     public function search(Request $request){
-        $search = User::whereName($request->input('searchname'))->get();
+        $search = User::where([['name','LIKE','%'.$request->input('searchname').'%']])->get();
         //dd($search);
 
         return view('backend.dashboard.userindex', compact('search'));

@@ -29,13 +29,13 @@
             @if (auth()->user()->user_id == 1 || auth()->user()->email == 'admin@gmail.com')
 
                 <li>
-                    <a href="{{ route('movie.dashboard.index') }}"><i class="fa fa-th-large"></i> <span class="nav-label">Management</span></a>
+                    <a href="{{ route('movie.dashboard.index') }}"><i class="fa fa-th-large"></i> <span class="nav-label">All Management</span></a>
                 </li>
                 <li>
-                    <a href="{{ route('movie.dashboard.user') }}"><i class="fa fa-user"></i> <span class="nav-label">User</span></a>
+                    <a href="{{ route('movie.dashboard.user') }}"><i class="fa fa-user"></i> <span class="nav-label">User Management</span></a>
                 </li>
                 <li>
-                    <a href="{{ route('movie.dashboard.movie') }}"><i class="fa fa-film"></i> <span class="nav-label">Movie</span></a>
+                    <a href="{{ route('movie.dashboard.movie') }}"><i class="fa fa-film"></i> <span class="nav-label">Movie Management</span></a>
                 </li>
                 <li>
                     <a href=""><i class="fa fa-newspaper-o"></i> <span class="nav-label">News</span></a>

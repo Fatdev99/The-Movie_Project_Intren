@@ -5,7 +5,7 @@
         <div class="col-lg-12">
             <div class="ibox">
                 <div class="ibox-title">
-                    <h2>UPDATE MOVIE FORM</h2>
+                    <h2>ADD NEW MOVIE FORM</h2>
                 </div>
                 <div class="ibox-content">
                     <form method="POST" class="form-horizontal" action="{{ route('movie.movie.store') }}">
@@ -27,18 +27,18 @@
                             <div class="col-sm-10">
                                 <input type="text" class="form-control" name="releaseyear" placeholder="Release year. ex: 2011" value="">
                                 @if ($errors->has('releaseyear'))
-                                    <span class="error-message">* {{$errors->first('release_date')}}</span>
+                                    <span class="error-message">* {{$errors->first('releaseyear')}}</span>
                                 @endif
                             </div>
                         </div>
                         <div class="hr-line-dashed" style="margin: 17px 0"></div>
 
-                        <div class="form-group"><label class="col-sm-2 control-label">Runtime</label>
+                        <div class="form-group"><label class="col-sm-2 control-label">Duration</label>
 
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" name="duration" placeholder="Run time" value="">
+                                <input type="text" class="form-control" name="duration" placeholder="duration" value="">
                                 @if ($errors->has('duration'))
-                                    <span class="error-message">* {{$errors->first('runtime')}}</span>
+                                    <span class="error-message">* {{$errors->first('duration')}}</span>
                                 @endif
                             </div>
                         </div>
@@ -66,9 +66,34 @@
                                     <input type="radio" id="inlineRadio2" value="tvShow" name="category" >
                                     <label for="inlineRadio2" style="padding-left: 10px"> tvShow </label>
                                 </div>
-                                @if ($errors->has('category'))
-                                    <span class="error-message">* {{$errors->first('category')}}</span>
-                                @endif
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed" style="margin: 17px 0"></div>
+
+                        <div class="form-group"><label class="col-sm-2 control-label">Genre</label>
+
+                            <div class="col-sm-10 row">
+                                <select class="form-control m-b" name="genre1">
+                                    @isset($genre)
+                                        @foreach ($genre as $gen)
+                                            <option value="{{ $gen->genre_id}}"> {{ $gen->genre_name }} </option>
+                                        @endforeach
+                                    @endisset
+                                </select>
+                                <select class="form-control m-b" name="genre2">
+                                    @isset($genre)
+                                        @foreach ($genre as $gen)
+                                            <option value="{{ $gen->genre_id}}"> {{ $gen->genre_name }} </option>
+                                        @endforeach
+                                    @endisset
+                                </select>
+                                <select class="form-control m-b" name="genre3">
+                                    @isset($genre)
+                                        @foreach ($genre as $gen)
+                                            <option value="{{ $gen->genre_id}}"> {{ $gen->genre_name }} </option>
+                                        @endforeach
+                                    @endisset
+                                </select>
                             </div>
                         </div>
                         <div class="hr-line-dashed" style="margin: 17px 0"></div>
